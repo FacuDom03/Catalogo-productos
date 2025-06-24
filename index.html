@@ -27,7 +27,12 @@
     <main class="contenedor">
         <h1>Nuestros Productos</h1>
 
-        
+    <div class="filtro">
+        <label for="filtro-precio">Filtrar por precio máximo:</label>
+        <input type="range" id="filtro-precio" min="0" max="50" value="50">
+        <span id="precio-actual">$200</span>
+    </div>
+    
     <div id="catalogo" class="grid"></div>
 
     </main>

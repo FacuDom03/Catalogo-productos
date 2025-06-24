@@ -364,3 +364,15 @@ select.formulario__campo {
   margin-top: 2rem;
   display: none;
 }
+
+.filtro {
+  margin-bottom: 3rem;
+  color: var(--blanco);
+  font-family: var(--fuentePrincipal);
+  font-size: 2rem;
+  text-align: center;
+}
+#filtro-precio {
+  width: 100%;
+  max-width: 300px;
+}
