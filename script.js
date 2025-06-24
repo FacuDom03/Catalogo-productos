@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { nombre: 'ReactJS', precio: 25, imagen: 'img/3.jpg' },
     { nombre: 'Redux', precio: 25, imagen: 'img/4.jpg' },
     { nombre: 'Node.js', precio: 25, imagen: 'img/5.jpg' },
-    { nombre: 'SASS', precio: 35, imagen: 'img/6.jpg' },
-    { nombre: 'HTML5', precio: 45, imagen: 'img/7.jpg' },
-    { nombre: 'Github', precio: 25, imagen: 'img/8.jpg' },
-    { nombre: 'BulmaCSS', precio: 100, imagen: 'img/9.jpg' },
+    { nombre: 'SASS', precio: 45, imagen: 'img/6.jpg' },
+    { nombre: 'HTML5', precio: 180, imagen: 'img/7.jpg' },
+    { nombre: 'Github', precio: 125, imagen: 'img/8.jpg' },
+    { nombre: 'BulmaCSS', precio: 25, imagen: 'img/9.jpg' },
     { nombre: 'TypeScript', precio: 25, imagen: 'img/10.jpg' },
     { nombre: 'Drupal', precio: 25, imagen: 'img/11.jpg' },
     { nombre: 'JavaScript', precio: 25, imagen: 'img/12.jpg' },
@@ -44,29 +44,25 @@ document.addEventListener('DOMContentLoaded', () => {
       `
       catalogo.appendChild(div)
     })
-
-    agregarEventos()
   }
 
-  function agregarEventos() {
-    const botones = document.querySelectorAll('.producto__boton')
-    botones.forEach(boton => {
-      boton.addEventListener('click', () => {
-        const producto = {
-          nombre: boton.dataset.nombre,
-          precio: parseFloat(boton.dataset.precio),
-          imagen: boton.dataset.imagen
-        }
+  catalogo.addEventListener('click', e => {
+    if (e.target.classList.contains('producto__boton')) {
+      const boton = e.target
+      const producto = {
+        nombre: boton.dataset.nombre,
+        precio: parseFloat(boton.dataset.precio),
+        imagen: boton.dataset.imagen
+      }
 
-        const carrito = JSON.parse(localStorage.getItem('carrito')) || []
-        carrito.push(producto)
-        localStorage.setItem('carrito', JSON.stringify(carrito))
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || []
+      carrito.push(producto)
+      localStorage.setItem('carrito', JSON.stringify(carrito))
 
-        alert(`${producto.nombre} fue agregado al carrito.`)
-        actualizarContador()
-      })
-    })
-  }
+      alert(`${producto.nombre} fue agregado al carrito.`)
+      actualizarContador()
+    }
+  })
 
   function actualizarContador() {
     const contador = document.getElementById('contador')
@@ -76,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Si existe el filtro, lo escuchamos
   if (inputFiltro) {
     inputFiltro.addEventListener('input', () => {
       const valor = parseInt(inputFiltro.value)
@@ -87,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  // Render inicial
   renderProductos(productos)
   actualizarContador()
 })
