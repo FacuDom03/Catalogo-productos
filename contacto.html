@@ -21,23 +21,28 @@
     <a class="navegacion__enlace" href="nosotros.html">Nosotros</a>
     <a class="navegacion__enlace navegacion__enlace--activo" href="contacto.html">Contacto</a>
     <a class="navegacion__enlace" href="carrito.html">
-        Carrito <span id="contador">(0)</span>
+      Carrito <span id="contador">(0)</span>
     </a>
   </nav>
 
   <main class="contenedor">
     <h1>Contacto</h1>
     <p>Si tenés alguna consulta sobre los productos o el proyecto, podés escribirme usando este formulario.</p>
-    <form class="formulario">
-      <input class="formulario__campo" type="text" placeholder="Nombre" required />
-      <input class="formulario__campo" type="email" placeholder="Correo" required />
-      <select class="formulario__campo">
+
+    <form class="formulario" action="#" method="post">
+      <input class="formulario__campo" type="text" name="nombre" placeholder="Nombre" required />
+      <input class="formulario__campo" type="email" name="correo" placeholder="Correo" required />
+
+      <select class="formulario__campo" name="producto">
         <option disabled selected>Selecciona un producto</option>
         <option>VueJS</option>
         <option>ReactJS</option>
         <option>Node.js</option>
+        <option>Otros</option>
       </select>
-      <textarea class="formulario__campo" placeholder="Mensaje"></textarea>
+
+      <textarea class="formulario__campo" name="mensaje" placeholder="Mensaje" required></textarea>
+
       <input type="submit" class="formulario__submit" value="Enviar" />
     </form>
   </main>
@@ -47,7 +52,5 @@
   </footer>
 
   <script src="carrito.js"></script>
-
-
 </body>
 </html>
