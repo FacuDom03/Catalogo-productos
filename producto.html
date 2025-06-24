@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle del Producto</title>
+  <link rel="stylesheet" href="normalize.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html">
+      <img class="header__logo" src="img/logo.png" alt="Logotipo" />
+    </a>
+  </header>
+
+  <nav class="navegacion">
+    <a class="navegacion__enlace" href="index.html">Tienda</a>
+    <a class="navegacion__enlace" href="nosotros.html">Nosotros</a>
+    <a class="navegacion__enlace" href="contacto.html">Contacto</a>
+    <a class="navegacion__enlace" href="carrito.html">Carrito</a>
+  </nav>
+
+  <main class="contenedor">
+    <h1 id="titulo">Producto</h1>
+
+    <div id="detalle" class="producto" style="max-width: 50rem; margin: 0 auto;"></div>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__texto">Facundo Domínguez © 2025. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search)
+
+    const nombre = params.get('nombre')
+    const precio = params.get('precio')
+    const imagen = params.get('imagen')
+
+    document.getElementById('titulo').textContent = nombre
+
+    const div = document.getElementById('detalle')
+    div.innerHTML = `
+      <img class="producto__imagen" src="${imagen}" alt="${nombre}">
+      <div class="producto__informacion">
+        <p class="producto__nombre">${nombre}</p>
+        <p class="producto__precio">$${precio}</p>
+        <button class="producto__boton" data-nombre="${nombre}" data-precio="${precio}">
+          Agregar al carrito
+        </button>
+      </div>
+    `
+
+    const boton = div.querySelector('.producto__boton')
+    boton.addEventListener('click', () => {
+      const producto = { nombre, precio: parseFloat(precio) }
+
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || []
+      carrito.push(producto)
+      localStorage.setItem('carrito', JSON.stringify(carrito))
+
+      alert(`${nombre} fue agregado al carrito.`)
+    })
+  </script>
+
+</body>
+</html>
