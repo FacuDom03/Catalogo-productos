@@ -33,33 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         Agregar al carrito
       </button>
     `
-
-    const boton = div.querySelector('.producto__boton')
-    boton.addEventListener('click', () => {
-      const producto = {
-        nombre: prod.nombre,
-        precio: prod.precio
-      }
-
-      const carrito = JSON.parse(localStorage.getItem('carrito')) || []
-      carrito.push(producto)
-      localStorage.setItem('carrito', JSON.stringify(carrito))
-
-      alert(`${prod.nombre} fue agregado al carrito.`)
-      actualizarContador()
-    })
-
     catalogo.appendChild(div)
   })
-
-  // Mostrar cantidad de productos en el carrito si hay contador en el nav
-  function actualizarContador() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || []
-    const contador = document.getElementById('contador')
-    if (contador) {
-      contador.textContent = `(${carrito.length})`
-    }
-  }
-
-  actualizarContador()
 })
