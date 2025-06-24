@@ -62,16 +62,18 @@
         const div = document.createElement('div')
         div.classList.add('producto')
         div.innerHTML = `
+          <img class="producto__imagen" src="${prod.imagen}" alt="${prod.nombre}">
           <div class="producto__informacion">
             <p class="producto__nombre">${prod.nombre}</p>
             <p class="producto__precio">$${prod.precio}</p>
+            <button class="producto__eliminar" data-index="${index}">Eliminar</button>
           </div>
         `
         lista.appendChild(div)
         totalCompra += prod.precio
       })
 
-      total.textContent = `Total: $${totalCompra}`
+      total.innerHTML = `<strong style="font-size: 2.4rem;">Total: $${totalCompra.toFixed(2)}</strong>`
 
       btnVaciar.addEventListener('click', () => {
         localStorage.removeItem('carrito')
