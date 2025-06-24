@@ -23,32 +23,43 @@ document.addEventListener('DOMContentLoaded', () => {
     div.classList.add('producto')
     div.innerHTML = `
       <a href="producto.html?nombre=${prod.nombre}&precio=${prod.precio}&imagen=${prod.imagen}">
-      <img class="producto__imagen" src="${prod.imagen}" alt="Imagen ${prod.nombre}">
-      <div class="producto__informacion">
-        <p class="producto__nombre">${prod.nombre}</p>
-        <p class="producto__precio">$${prod.precio}</p>
-        <button class="producto__boton" data-nombre="${prod.nombre}" data-precio="${prod.precio}">
-          Agregar al carrito
-        </button>
-      </div>
+        <img class="producto__imagen" src="${prod.imagen}" alt="Imagen ${prod.nombre}">
+        <div class="producto__informacion">
+          <p class="producto__nombre">${prod.nombre}</p>
+          <p class="producto__precio">$${prod.precio}</p>
+        </div>
+      </a>
+      <button class="producto__boton" data-nombre="${prod.nombre}" data-precio="${prod.precio}">
+        Agregar al carrito
+      </button>
     `
-    catalogo.appendChild(div)
-  })
 
-  // Funcionalidad del carrito
-  const botones = document.querySelectorAll('.producto__boton')
-
-  botones.forEach(boton => {
+    const boton = div.querySelector('.producto__boton')
     boton.addEventListener('click', () => {
-      const nombre = boton.dataset.nombre
-      const precio = parseFloat(boton.dataset.precio)
-      const producto = { nombre, precio }
+      const producto = {
+        nombre: prod.nombre,
+        precio: prod.precio
+      }
 
       const carrito = JSON.parse(localStorage.getItem('carrito')) || []
       carrito.push(producto)
       localStorage.setItem('carrito', JSON.stringify(carrito))
 
-      alert(`${nombre} fue agregado al carrito.`)
+      alert(`${prod.nombre} fue agregado al carrito.`)
+      actualizarContador()
     })
+
+    catalogo.appendChild(div)
   })
+
+  // Mostrar cantidad de productos en el carrito si hay contador en el nav
+  function actualizarContador() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || []
+    const contador = document.getElementById('contador')
+    if (contador) {
+      contador.textContent = `(${carrito.length})`
+    }
+  }
+
+  actualizarContador()
 })
