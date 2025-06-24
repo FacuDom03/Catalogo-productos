@@ -33,18 +33,31 @@
       <input class="formulario__campo" type="text" name="nombre" placeholder="Nombre" required />
       <input class="formulario__campo" type="email" name="correo" placeholder="Correo" required />
 
-      <select class="formulario__campo" name="producto">
+      <select class="formulario__campo" name="producto" required>
         <option disabled selected>Selecciona un producto</option>
-        <option>VueJS</option>
-        <option>ReactJS</option>
-        <option>Node.js</option>
-        <option>Otros</option>
+          <option>VueJS</option>
+          <option>AngularJS</option>
+          <option>ReactJS</option>
+          <option>Redux</option>
+          <option>Node.js</option>
+          <option>SASS</option>
+          <option>HTML5</option>
+          <option>Github</option>
+          <option>BulmaCSS</option>
+          <option>TypeScript</option>
+          <option>Drupal</option>
+          <option>JavaScript</option>
+          <option>GraphQL</option>
+          <option>WordPress</option>
+          <option>Otros</option>
       </select>
+
 
       <textarea class="formulario__campo" name="mensaje" placeholder="Mensaje" required></textarea>
 
       <input type="submit" class="formulario__submit" value="Enviar" />
     </form>
+    <p id="mensaje-exito" class="formulario__mensaje-exito"></p>
   </main>
 
   <footer class="footer">
@@ -52,5 +65,40 @@
   </footer>
 
   <script src="carrito.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const formulario = document.querySelector('.formulario')
+    const mensajeExito = document.getElementById('mensaje-exito')
+
+    formulario.addEventListener('submit', e => {
+      e.preventDefault()
+
+      const nombre = formulario.querySelector('input[type="text"]').value.trim()
+      const correo = formulario.querySelector('input[type="email"]').value.trim()
+      const producto = formulario.querySelector('select').value
+      const mensaje = formulario.querySelector('textarea').value.trim()
+
+      if (!nombre || !correo || !mensaje || producto === 'Selecciona un producto') {
+        mensajeExito.textContent = 'Por favor completá todos los campos.'
+        mensajeExito.style.backgroundColor = 'crimson'
+        mensajeExito.style.color = 'white'
+        mensajeExito.style.display = 'block'
+        return
+      }
+
+      mensajeExito.textContent = '¡Gracias por tu mensaje! Nos contactaremos pronto.'
+      mensajeExito.style.backgroundColor = 'var(--secundario)'
+      mensajeExito.style.color = 'var(--negro)'
+      mensajeExito.style.display = 'block'
+
+      formulario.reset()
+
+      setTimeout(() => {
+        mensajeExito.style.display = 'none'
+      }, 5000)
+    })
+  })
+</script>
+
 </body>
 </html>
