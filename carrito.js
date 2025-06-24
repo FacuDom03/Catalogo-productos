@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 👉 Función para actualizar el contador en el menú
+  //Función para actualizar el contador en el menú
   function actualizarContador() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || []
     const contador = document.getElementById('contador')
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 👉 Seleccionar todos los botones que agregan al carrito
+  // Seleccionar todos los botones que agregan al carrito
   const botones = document.querySelectorAll('.producto__boton')
 
   botones.forEach(boton => {
@@ -29,6 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  // 👉 Siempre actualizar el contador al cargar la página
+  //Siempre actualizar el contador al cargar la página
   actualizarContador()
 })
