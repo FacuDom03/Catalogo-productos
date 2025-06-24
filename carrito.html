@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="normalize.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html">
+      <img class="header__logo" src="img/logo.png" alt="Logotipo">
+    </a>
+  </header>
+
+  <nav class="navegacion">
+    <a class="navegacion__enlace" href="index.html">Tienda</a>
+    <a class="navegacion__enlace" href="nosotros.html">Nosotros</a>
+    <a class="navegacion__enlace" href="contacto.html">Contacto</a>
+    <a class="navegacion__enlace navegacion__enlace--activo" href="carrito.html">
+      Carrito <span id="contador">(0)</span>
+    </a>
+  </nav>
+
+  <main class="contenedor">
+    <h1>Carrito de Compras</h1>
+
+    <div id="carrito-lista" class="grid"></div>
+
+    <div id="carrito-total" style="margin-top: 2rem; font-size: 1.8rem; text-align: right;"></div>
+
+    <button id="vaciar-carrito" class="producto__boton" style="margin-top: 2rem;">
+      Vaciar carrito
+    </button>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__texto">Dominguez Facundo © 2025. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="carrito.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const lista = document.getElementById('carrito-lista')
+      const total = document.getElementById('carrito-total')
+      const btnVaciar = document.getElementById('vaciar-carrito')
+
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || []
+
+      if (carrito.length === 0) {
+        lista.innerHTML = '<p>No hay productos en el carrito.</p>'
+        total.textContent = ''
+        return
+      }
+
+      let totalCompra = 0
+
+      carrito.forEach(prod => {
+        const div = document.createElement('div')
+        div.classList.add('producto')
+        div.innerHTML = `
+          <div class="producto__informacion">
+            <p class="producto__nombre">${prod.nombre}</p>
+            <p class="producto__precio">$${prod.precio}</p>
+          </div>
+        `
+        lista.appendChild(div)
+        totalCompra += prod.precio
+      })
+
+      total.textContent = `Total: $${totalCompra}`
+
+      btnVaciar.addEventListener('click', () => {
+        localStorage.removeItem('carrito')
+        location.reload()
+      })
+    })
+  </script>
+
+</body>
+</html>

@@ -29,9 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="producto__precio">$${prod.precio}</p>
         </div>
       </a>
-      <button class="producto__boton" data-nombre="${prod.nombre}" data-precio="${prod.precio}">
+      <button 
+        class="producto__boton" 
+        data-nombre="${prod.nombre}" 
+        data-precio="${prod.precio}" 
+        data-imagen="${prod.imagen}">
         Agregar al carrito
       </button>
+
     `
     catalogo.appendChild(div)
   })
